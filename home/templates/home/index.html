@@ -1,0 +1,376 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}茶饮配方手册 · 从一片鲜叶到一杯茶汤{% endblock %}
+{% block meta_description %}茶饮配方手册门户：六大茶类图谱、新式茶饮配方、冲泡参数与茶事速报，一站查全。{% endblock %}
+
+{% block content %}
+
+    {# ==================== 首屏轮播 ==================== #}
+    <section class="hero">
+        <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="6000">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0"
+                        class="active" aria-current="true" aria-label="第 1 张"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"
+                        aria-label="第 2 张"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"
+                        aria-label="第 3 张"></button>
+            </div>
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="hero-slide hero-slide--green">
+                        <span class="hero-slide__glyph" aria-hidden="true">茶</span>
+                        <div class="container">
+                            <div class="hero-content">
+                                <p class="hero-eyebrow mb-2">SIX TEA TYPES · 传统茶</p>
+                                <h1 class="display-5 mb-3">一片叶子的<br>九种打开方式</h1>
+                                <p class="lead mb-4">
+                                    从杀青到渥堆，工艺决定了汤色与香气。用一张图谱看懂六大茶类，
+                                    再用参数表复刻每一杯。
+                                </p>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <a href="#tea-categories" class="btn btn-light px-4 fw-semibold">开始探索</a>
+                                    <a href="#brew-guide" class="btn btn-outline-light px-4">冲泡指南</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="hero-slide hero-slide--oolong">
+                        <span class="hero-slide__glyph" aria-hidden="true">香</span>
+                        <div class="container">
+                            <div class="hero-content">
+                                <p class="hero-eyebrow mb-2">OOLONG · 半发酵之美</p>
+                                <h1 class="display-5 mb-3">摇出花果香</h1>
+                                <p class="lead mb-4">
+                                    凤凰单丛的蜜兰香、铁观音的兰花香，都来自做青时那几次恰到好处的碰撞。
+                                </p>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <a href="#season-featured" class="btn btn-light px-4 fw-semibold">看本季配方</a>
+                                    <a href="#tea-categories" class="btn btn-outline-light px-4">茶类图谱</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="hero-slide hero-slide--milk">
+                        <span class="hero-slide__glyph" aria-hidden="true">奶</span>
+                        <div class="container">
+                            <div class="hero-content">
+                                <p class="hero-eyebrow mb-2">NEW TEA · 新式茶饮</p>
+                                <h1 class="display-5 mb-3">茶底 × 奶制<br>配比实验</h1>
+                                <p class="lead mb-4">
+                                    厚乳、生椰、芋泥与不同茶底的组合，每一组都有可复现的克数与温度。
+                                </p>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <a href="#tea-categories" class="btn btn-light px-4 fw-semibold">进入配方库</a>
+                                    <a href="#news" class="btn btn-outline-light px-4">茶事速报</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button"
+                    data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">上一张</span>
+            </button>
+            <button class="carousel-control-next" type="button"
+                    data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">下一张</span>
+            </button>
+        </div>
+    </section>
+
+    {# ==================== 数据条 ==================== #}
+    <section class="stat-strip">
+        <div class="container py-4">
+            <div class="row row-cols-2 row-cols-md-4 g-3 text-center">
+                {% for stat in stats %}
+                    <div class="col">
+                        <div class="stat-number">{{ stat.number }}</div>
+                        <div class="stat-label">{{ stat.label }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {# ==================== 茶类总览 ==================== #}
+    <section class="section" id="tea-categories">
+        <div class="container">
+            <div class="row align-items-end g-3 mb-4 mb-lg-5">
+                <div class="col-lg-7">
+                    <p class="section-eyebrow mb-2">TEA CATEGORIES</p>
+                    <h2 class="section-title display-6 mb-3">按工艺分类的茶世界</h2>
+                    <p class="section-desc mb-0">
+                        发酵度是茶类划分的核心线索。同一片叶子，因工艺不同走向九种风味，
+                        点击卡片即可查看对应配方与冲泡参数。
+                    </p>
+                </div>
+                <div class="col-lg-5">
+                    <ul class="nav nav-pills justify-content-lg-end gap-2" id="teaTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active rounded-pill px-3" id="tab-traditional-tab"
+                                    data-bs-toggle="pill" data-bs-target="#tab-traditional"
+                                    type="button" role="tab" aria-controls="tab-traditional" aria-selected="true">
+                                传统茶类
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-pill px-3" id="tab-modern-tab"
+                                    data-bs-toggle="pill" data-bs-target="#tab-modern"
+                                    type="button" role="tab" aria-controls="tab-modern" aria-selected="false">
+                                新式茶饮
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tab-content" id="teaTabsContent">
+                <div class="tab-pane fade show active" id="tab-traditional"
+                     role="tabpanel" aria-labelledby="tab-traditional-tab" tabindex="0">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
+                        {% for tea in tea_categories|slice:":7" %}
+                            <div class="col">
+                                {% include "includes/tea_card.html" with tea=tea %}
+                            </div>
+                        {% endfor %}
+                        <div class="col">
+                            <div class="card tea-card h-100 border-0 shadow-sm bg-transparent">
+                                <div class="card-body d-flex flex-column justify-content-center align-items-start p-4 h-100"
+                                     style="border: 1px dashed var(--tea-300); border-radius: 1rem;">
+                                    <p class="section-eyebrow mb-2">FERMENTATION</p>
+                                    <h3 class="h6 mb-2">发酵度是条主轴</h3>
+                                    <p class="small text-body-secondary mb-3">
+                                        从 0% 的绿茶到 100% 的黑茶，颜色越深，发酵越充分。
+                                    </p>
+                                    <a href="#brew-guide" class="btn btn-sm btn-outline-tea">看冲泡差异</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab-modern"
+                     role="tabpanel" aria-labelledby="tab-modern-tab" tabindex="0">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
+                        {% for tea in tea_categories|slice:"7:" %}
+                            <div class="col">
+                                {% include "includes/tea_card.html" with tea=tea %}
+                            </div>
+                        {% endfor %}
+                        <div class="col">
+                            <div class="card tea-card h-100 border-0 shadow-sm bg-transparent">
+                                <div class="card-body d-flex flex-column justify-content-center align-items-start p-4 h-100"
+                                     style="border: 1px dashed var(--tea-300); border-radius: 1rem;">
+                                    <h3 class="h6 mb-2">还有更多？</h3>
+                                    <p class="small text-body-secondary mb-3">
+                                        配方库每周更新，收录门店同款与家用简化版。
+                                    </p>
+                                    <a href="#season-featured" class="btn btn-sm btn-outline-tea">浏览全部配方</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# ==================== 本季精选 ==================== #}
+    <section class="section pt-0" id="season-featured">
+        <div class="container">
+            <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+                <div>
+                    <p class="section-eyebrow mb-2">SEASON PICKS</p>
+                    <h2 class="section-title display-6 mb-0">本季精选配方</h2>
+                </div>
+                <a href="#" class="link-tea text-decoration-none small fw-semibold">查看全部 231 款 →</a>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="row row-cols-1 row-cols-md-2 g-4">
+                        {% for recipe in season_featured %}
+                            <div class="col">
+                                <div class="card recipe-card shadow-sm">
+                                    <div class="recipe-card__top"
+                                         style="background-image: linear-gradient(135deg, {{ recipe.color_from }}, {{ recipe.color_to }});">
+                                        <h3>{{ recipe.name }}</h3>
+                                        <span class="badge rounded-pill text-bg-light text-dark">{{ recipe.level }}</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="recipe-meta mb-2">
+                                            <span>{{ recipe.category }}</span>
+                                            <span>{{ recipe.time }}</span>
+                                            <span>{{ recipe.temp }}</span>
+                                        </div>
+                                        <p class="card-text small text-body-secondary mb-0">{{ recipe.desc }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card news-card shadow-sm h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <h3 class="h6 mb-0">本周热搜</h3>
+                                <span class="badge rounded-pill tea-tag">实时</span>
+                            </div>
+                            <ul class="list-group list-group-flush rank-list">
+                                {% for item in ranking %}
+                                    <li class="list-group-item d-flex align-items-center gap-3">
+                                        <span class="rank-index">{{ forloop.counter }}</span>
+                                        <span class="flex-grow-1">
+                                            <span class="d-block small fw-semibold">{{ item.name }}</span>
+                                            <span class="text-body-secondary" style="font-size: .74rem;">{{ item.category }}</span>
+                                        </span>
+                                        <small class="text-body-secondary">{{ item.views }}</small>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# ==================== 冲泡指南 ==================== #}
+    <section class="section pt-0" id="brew-guide">
+        <div class="container">
+            <div class="row g-4 g-lg-5 align-items-start">
+                <div class="col-lg-7">
+                    <p class="section-eyebrow mb-2">BREWING GUIDE</p>
+                    <h2 class="section-title display-6 mb-3">冲泡，是最容易翻车的一步</h2>
+                    <p class="section-desc mb-4">水温、茶水比、出汤时间，三个变量决定一杯茶的成败。</p>
+
+                    <div class="accordion accordion-tea" id="brewAccordion">
+                        {% for item in brew_guide %}
+                            <div class="accordion-item">
+                                <h3 class="accordion-header" id="heading-{{ forloop.counter }}">
+                                    <button class="accordion-button{% if not item.open %} collapsed{% endif %}"
+                                            type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapse-{{ forloop.counter }}"
+                                            aria-expanded="{% if item.open %}true{% else %}false{% endif %}"
+                                            aria-controls="collapse-{{ forloop.counter }}">
+                                        {{ item.title }}
+                                    </button>
+                                </h3>
+                                <div id="collapse-{{ forloop.counter }}"
+                                     class="accordion-collapse collapse{% if item.open %} show{% endif %}"
+                                     aria-labelledby="heading-{{ forloop.counter }}"
+                                     data-bs-parent="#brewAccordion">
+                                    <div class="accordion-body">{{ item.body }}</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="card brew-panel shadow-sm">
+                        <div class="card-body p-4">
+                            <h3 class="h6 mb-1">参数速查表</h3>
+                            <p class="small text-body-secondary">以 150ml 水、3g 茶为基准</p>
+                            <div class="table-responsive">
+                                <table class="table table-sm align-middle mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">茶类</th>
+                                        <th scope="col">水温</th>
+                                        <th scope="col">出汤</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for row in brew_table %}
+                                        <tr>
+                                            <td class="small fw-semibold">{{ row.name }}</td>
+                                            <td class="small">{{ row.temp }}</td>
+                                            <td class="small">{{ row.time }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-tea w-100 mt-3">下载完整参数表（PDF）</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# ==================== 茶事速报 ==================== #}
+    <section class="section pt-0" id="news">
+        <div class="container">
+            <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+                <div>
+                    <p class="section-eyebrow mb-2">TEA JOURNAL</p>
+                    <h2 class="section-title display-6 mb-0">茶事速报</h2>
+                </div>
+                <a href="#" class="link-tea text-decoration-none small fw-semibold">订阅更新 →</a>
+            </div>
+
+            <div class="row g-4">
+                {% for item in news %}
+                    <div class="col-md-6 col-xl-3">
+                        <div class="card news-card shadow-sm h-100">
+                            <div class="card-body d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="news-date">{{ item.date }}</span>
+                                    <span class="badge rounded-pill tea-tag">{{ item.tag }}</span>
+                                </div>
+                                <h3 class="h6 mb-3">{{ item.title }}</h3>
+                                <a href="#" class="link-tea small text-decoration-none mt-auto fw-semibold">阅读全文 →</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {# ==================== 订阅 CTA ==================== #}
+    <section class="pb-5">
+        <div class="container">
+            <div class="cta-band p-4 p-lg-5">
+                <div class="row align-items-center g-4 position-relative" style="z-index: 2;">
+                    <div class="col-lg-7">
+                        <h2 class="section-title text-white h3 mb-2">每周一封茶信</h2>
+                        <p class="mb-0 text-white-50">
+                            新品配方、时令茶单与冲泡技巧，周一早上送到你的邮箱。
+                        </p>
+                    </div>
+                    <div class="col-lg-5">
+                        <form class="row g-2" action="#" method="post">
+                            {% csrf_token %}
+                            <div class="col-12">
+                                <div class="input-group">
+                                    <input type="email" class="form-control" name="email"
+                                           placeholder="your@email.com" aria-label="邮箱地址" required>
+                                    <button class="btn btn-light fw-semibold" type="submit">立即订阅</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

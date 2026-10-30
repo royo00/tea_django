@@ -1,0 +1,24 @@
+{% load static %}
+<article class="card tea-card h-100 border-0 shadow-sm">
+    <div class="tea-card__cover"
+         style="background-image: linear-gradient(135deg, {{ tea.color_from }}, {{ tea.color_to }});">
+        <span class="tea-card__emoji" aria-hidden="true">{{ tea.emoji }}</span>
+        <span class="badge rounded-pill text-bg-light tea-card__badge">{{ tea.ferment }}</span>
+    </div>
+    <div class="card-body pb-2">
+        <div class="d-flex justify-content-between align-items-baseline gap-2">
+            <h3 class="card-title h6 mb-1">{{ tea.name }}</h3>
+            <small class="text-body-secondary">{{ tea.en }}</small>
+        </div>
+        <p class="card-text small text-body-secondary mb-3">{{ tea.desc }}</p>
+        <div class="d-flex flex-wrap gap-1">
+            {% for tag in tea.tags %}
+                <span class="badge rounded-pill tea-tag">{{ tag }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center pt-0 pb-3">
+        <small class="text-body-secondary">{{ tea.count }} 款配方</small>
+        <a href="#season-featured" class="link-tea small text-decoration-none fw-semibold">查看配方 →</a>
+    </div>
+</article>

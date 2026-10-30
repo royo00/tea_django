@@ -1,0 +1,78 @@
+{% load static %}
+<footer class="footer-tea mt-auto">
+    <div class="container py-5">
+        <div class="row g-4 gy-5">
+
+            {# 品牌简介 #}
+            <div class="col-12 col-lg-4">
+                <a class="footer-brand d-inline-flex align-items-center gap-2 text-decoration-none mb-3"
+                   href="{% url 'index' %}">
+                    <span class="brand-mark brand-mark--sm">茶</span>
+                    <span class="brand-name">茶饮配方手册</span>
+                </a>
+                <p class="footer-text small mb-4">
+                    从一片鲜叶到一杯茶汤。我们整理六大茶类的工艺脉络、新式茶饮的配比数据，
+                    让每一次冲泡都有据可依。
+                </p>
+                <div class="d-flex gap-2">
+                    <a class="footer-social" href="#" aria-label="微信公众号">微信</a>
+                    <a class="footer-social" href="#" aria-label="小红书">小红书</a>
+                    <a class="footer-social" href="#" aria-label="哔哩哔哩">B 站</a>
+                    <a class="footer-social" href="#" aria-label="邮件订阅">邮件</a>
+                </div>
+            </div>
+
+            {# 链接列 #}
+            <div class="col-6 col-lg-2">
+                <h2 class="footer-title">茶类</h2>
+                <ul class="list-unstyled footer-links small">
+                    <li><a href="#tea-categories">绿茶</a></li>
+                    <li><a href="#tea-categories">红茶</a></li>
+                    <li><a href="#tea-categories">乌龙茶</a></li>
+                    <li><a href="#tea-categories">白茶 · 黑茶</a></li>
+                    <li><a href="#tea-categories">新式茶饮</a></li>
+                </ul>
+            </div>
+
+            <div class="col-6 col-lg-2">
+                <h2 class="footer-title">资源</h2>
+                <ul class="list-unstyled footer-links small">
+                    <li><a href="#brew-guide">冲泡参数表</a></li>
+                    <li><a href="#season-featured">配方库</a></li>
+                    <li><a href="#news">茶事速报</a></li>
+                    <li><a href="#">器具选购</a></li>
+                    <li><a href="#">常见问题</a></li>
+                </ul>
+            </div>
+
+            {# 订阅 #}
+            <div class="col-12 col-lg-4">
+                <h2 class="footer-title">每周一封茶信</h2>
+                <p class="footer-text small mb-3">新品配方、时令茶单与冲泡小技巧，周一早上送达。</p>
+                <form class="row g-2" action="#" method="post">
+                    {% csrf_token %}
+                    <div class="col-12">
+                        <div class="input-group">
+                            <input type="email" class="form-control" name="email"
+                                   placeholder="your@email.com" aria-label="邮箱地址" required>
+                            <button class="btn btn-tea-light" type="submit">订阅</button>
+                        </div>
+                        <div class="form-text footer-text mt-2">我们尊重你的收件箱，随时可退订。</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {# 底部版权 #}
+    <div class="footer-bottom">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 py-3">
+            <small class="footer-text mb-0">© 2026 茶饮配方手册 · 保留所有权利</small>
+            <ul class="list-inline mb-0 small footer-links">
+                <li class="list-inline-item"><a href="#">隐私政策</a></li>
+                <li class="list-inline-item"><a href="#">服务条款</a></li>
+                <li class="list-inline-item"><a href="#">联系我们</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>

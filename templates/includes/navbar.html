@@ -1,0 +1,54 @@
+{% load static %}
+<nav class="navbar navbar-expand-xl navbar-tea sticky-top shadow-sm" aria-label="主导航">
+    <div class="container">
+
+        <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'index' %}">
+            <span class="brand-mark">茶</span>
+            <span class="d-flex flex-column lh-1">
+                <span class="brand-name">茶饮配方手册</span>
+                <small class="brand-sub">TEA RECIPE HANDBOOK</small>
+            </span>
+        </a>
+
+        <button class="navbar-toggler border-0" type="button"
+                data-bs-toggle="collapse" data-bs-target="#mainNav"
+                aria-controls="mainNav" aria-expanded="false" aria-label="切换导航">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav mx-xl-auto mb-3 mb-xl-0 gap-lg-1">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'index' %}">首页</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">茶类图谱</a>
+                    <ul class="dropdown-menu dropdown-menu-tea shadow">
+                        <li><a class="dropdown-item" href="#tea-categories">传统六大茶类</a></li>
+                        <li><a class="dropdown-item" href="#tea-categories">花茶 · 窨制</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#tea-categories">新式茶饮</a></li>
+                        <li><a class="dropdown-item" href="#season-featured">本季精选</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="#season-featured">配方库</a></li>
+                <li class="nav-item"><a class="nav-link" href="#brew-guide">冲泡指南</a></li>
+                <li class="nav-item"><a class="nav-link" href="#news">茶事速报</a></li>
+            </ul>
+
+            <form class="d-flex me-xl-3 mb-3 mb-xl-0" role="search" action="{% url 'index' %}" method="get">
+                <div class="input-group input-group-sm nav-search">
+                    <input class="form-control" type="search" name="q" placeholder="搜索茶类 / 配方"
+                           aria-label="搜索茶类或配方">
+                    <button class="btn" type="submit" aria-label="搜索">🔍</button>
+                </div>
+            </form>
+
+            <div class="d-flex align-items-center gap-2">
+                <a class="btn btn-sm btn-outline-tea" href="#">登录</a>
+                <a class="btn btn-sm btn-tea" href="#">免费注册</a>
+            </div>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,32 @@
+{% load static %}
+{% load django_bootstrap5 %}
+<!DOCTYPE html>
+<html lang="zh-CN" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{% block meta_description %}茶饮配方手册 —— 收录传统六大茶类与新式茶饮的配方、参数与冲泡方法。{% endblock %}">
+    <title>{% block title %}茶饮配方手册{% endblock %}</title>
+
+    {# 由 django-bootstrap5 输出，读取 settings.BOOTSTRAP5 中配置的本地静态文件 #}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/site.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+{# ============ 导航栏（已抽取为独立片段） ============ #}
+{% include "includes/navbar.html" %}
+
+{# ============ 主内容区，由子模板填充 ============ #}
+<main class="flex-grow-1">
+    {% block content %}{% endblock %}
+</main>
+
+{# ============ 页脚（已抽取为独立片段） ============ #}
+{% include "includes/footer.html" %}
+
+{% bootstrap_javascript %}
+{% block extra_js %}{% endblock %}
+</body>
+</html>

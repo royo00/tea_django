@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_bootstrap5',
+    'home',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +56,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -132,8 +134,8 @@ BOOTSTRAP5 = {
     "css_url":{
         "url": "/static/css/bootstrap.min.css",
     },
-    "js_url":{
-        "url": "/static/js/bootstrap.min.js",
+    "javascript_url":{
+        "url": "/static/js/bootstrap.bundle.min.js",
     },
 }
 

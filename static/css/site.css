@@ -1,0 +1,620 @@
+/* =========================================================
+   茶饮配方手册 · 门户站点样式
+   基于 Bootstrap 5.3，仅补充品牌色与少量组件修饰
+   ========================================================= */
+
+:root {
+    --tea-900: #1b4433;
+    --tea-800: #24614a;
+    --tea-700: #2f7d5d;
+    --tea-500: #57b98a;
+    --tea-300: #a8ddc3;
+    --tea-100: #e7f3ec;
+    --tea-50: #f4f7f5;
+    --tea-accent: #c9574f;
+    --tea-warm: #fdf1e1;
+    --tea-ink: #1f2d27;
+}
+
+body {
+    background-color: var(--tea-50);
+    color: var(--tea-ink);
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.font-serif {
+    font-family: "Songti SC", "STSong", "SimSun", Georgia, "Times New Roman", serif;
+}
+
+/* 锚点跳转时为吸顶导航留出空间 */
+section[id] {
+    scroll-margin-top: 88px;
+}
+
+/* ---------- 品牌按钮 ---------- */
+.btn-tea {
+    background-color: var(--tea-700);
+    border-color: var(--tea-700);
+    color: #fff;
+}
+
+.btn-tea:hover,
+.btn-tea:focus {
+    background-color: var(--tea-900);
+    border-color: var(--tea-900);
+    color: #fff;
+}
+
+.btn-outline-tea {
+    border-color: var(--tea-700);
+    color: var(--tea-700);
+}
+
+.btn-outline-tea:hover,
+.btn-outline-tea:focus {
+    background-color: var(--tea-700);
+    color: #fff;
+}
+
+.btn-tea-light {
+    background-color: var(--tea-100);
+    border-color: var(--tea-100);
+    color: var(--tea-900);
+    font-weight: 600;
+}
+
+.btn-tea-light:hover {
+    background-color: #fff;
+    border-color: #fff;
+    color: var(--tea-900);
+}
+
+.link-tea {
+    color: var(--tea-700);
+}
+
+.link-tea:hover {
+    color: var(--tea-900);
+}
+
+/* ---------- 导航栏 ---------- */
+.navbar-tea {
+    background-color: rgba(255, 255, 255, .92);
+    backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--tea-100);
+    padding-block: .65rem;
+}
+
+.navbar-tea .nav-link {
+    color: #3f5449;
+    font-size: .95rem;
+    padding-inline: .75rem;
+    white-space: nowrap;
+    border-radius: .5rem;
+    transition: color .18s ease, background-color .18s ease;
+}
+
+.navbar-tea .nav-link:hover {
+    color: var(--tea-700);
+    background-color: var(--tea-100);
+}
+
+.navbar-tea .nav-link.active {
+    color: var(--tea-900);
+    font-weight: 600;
+    background-color: var(--tea-100);
+}
+
+.navbar-tea .navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.brand-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: linear-gradient(140deg, var(--tea-500), var(--tea-800));
+    color: #fff;
+    font-family: "Songti SC", "SimSun", serif;
+    font-size: 1.15rem;
+    line-height: 1;
+    box-shadow: 0 6px 14px rgba(47, 125, 93, .28);
+}
+
+.brand-mark--sm {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    font-size: .95rem;
+    box-shadow: none;
+}
+
+.brand-name {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--tea-900);
+    letter-spacing: .02em;
+}
+
+.brand-sub {
+    font-size: .58rem;
+    letter-spacing: .18em;
+    color: #8a9a92;
+}
+
+.nav-search .form-control {
+    border-color: var(--tea-100);
+    background-color: var(--tea-50);
+    min-width: 190px;
+}
+
+.nav-search .form-control:focus {
+    border-color: var(--tea-300);
+    box-shadow: 0 0 0 .2rem rgba(87, 185, 138, .18);
+    background-color: #fff;
+}
+
+.nav-search .btn {
+    border-color: var(--tea-100);
+    background-color: var(--tea-50);
+}
+
+.dropdown-menu-tea {
+    --bs-dropdown-link-active-bg: var(--tea-700);
+    --bs-dropdown-link-hover-bg: var(--tea-100);
+    border: 1px solid var(--tea-100);
+    border-radius: .75rem;
+    padding: .4rem;
+}
+
+.dropdown-menu-tea .dropdown-item {
+    border-radius: .5rem;
+    font-size: .92rem;
+}
+
+/* ---------- 首屏轮播 ---------- */
+.hero .carousel-item {
+    height: clamp(360px, 58vh, 520px);
+}
+
+.hero-slide {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-slide::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 78% 28%, rgba(255, 255, 255, .28), transparent 42%),
+        linear-gradient(100deg, rgba(15, 44, 33, .78) 0%, rgba(15, 44, 33, .35) 55%, rgba(15, 44, 33, .1) 100%);
+}
+
+.hero-slide--green {
+    background: linear-gradient(125deg, #2f7d5d, #7fcf9f);
+}
+
+.hero-slide--oolong {
+    background: linear-gradient(125deg, #7a4a2b, #d9a463);
+}
+
+.hero-slide--milk {
+    background: linear-gradient(125deg, #8c5f4a, #e3bda0);
+}
+
+.hero-slide__glyph {
+    position: absolute;
+    right: 3%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: "Songti SC", "STSong", "SimSun", Georgia, serif;
+    font-size: clamp(11rem, 24vw, 20rem);
+    line-height: 1;
+    color: rgba(255, 255, 255, .16);
+    user-select: none;
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 34rem;
+    color: #fff;
+}
+
+.hero-content .hero-eyebrow {
+    letter-spacing: .28em;
+    font-size: .72rem;
+    color: rgba(255, 255, 255, .78);
+}
+
+.hero-content h1 {
+    font-family: "Songti SC", "STSong", "SimSun", Georgia, serif;
+    font-weight: 700;
+    letter-spacing: .01em;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, .18);
+}
+
+.hero-content .lead {
+    color: rgba(255, 255, 255, .9);
+}
+
+.hero .carousel-indicators [data-bs-target] {
+    width: 26px;
+    height: 3px;
+    border-radius: 2px;
+    background-color: #fff;
+    opacity: .45;
+}
+
+.hero .carousel-indicators .active {
+    opacity: 1;
+}
+
+.hero .carousel-control-prev,
+.hero .carousel-control-next {
+    width: 5%;
+    opacity: .55;
+}
+
+.hero .carousel-control-prev:hover,
+.hero .carousel-control-next:hover {
+    opacity: 1;
+}
+
+/* ---------- 数据条 ---------- */
+.stat-strip {
+    background-color: #fff;
+    border-bottom: 1px solid var(--tea-100);
+}
+
+.stat-number {
+    font-family: "Songti SC", "STSong", "SimSun", Georgia, serif;
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    font-weight: 700;
+    color: var(--tea-800);
+    line-height: 1.1;
+}
+
+.stat-label {
+    font-size: .8rem;
+    color: #7b8c84;
+    letter-spacing: .06em;
+}
+
+/* ---------- 分类切换（nav-pills） ---------- */
+.nav-pills {
+    --bs-nav-pills-link-active-bg: var(--tea-700);
+    --bs-nav-pills-link-active-color: #fff;
+    --bs-nav-link-color: #55665e;
+    --bs-nav-link-hover-color: var(--tea-800);
+}
+
+.nav-pills .nav-link {
+    border: 1px solid var(--tea-100);
+    background-color: #fff;
+    font-size: .9rem;
+    transition: background-color .18s ease, color .18s ease, border-color .18s ease;
+}
+
+.nav-pills .nav-link:hover {
+    border-color: var(--tea-300);
+    background-color: var(--tea-100);
+}
+
+.nav-pills .nav-link.active {
+    border-color: var(--tea-700);
+    box-shadow: 0 6px 14px rgba(47, 125, 93, .22);
+}
+
+/* ---------- 区块标题 ---------- */.section {
+    padding-block: clamp(3rem, 6vw, 5rem);
+}
+
+.section-eyebrow {
+    font-size: .74rem;
+    letter-spacing: .26em;
+    color: var(--tea-500);
+    font-weight: 600;
+}
+
+.section-title {
+    font-family: "Songti SC", "STSong", "SimSun", Georgia, serif;
+    font-weight: 700;
+    color: var(--tea-900);
+}
+
+.section-desc {
+    color: #6b7d74;
+    max-width: 38rem;
+}
+
+/* ---------- 茶类卡片 ---------- */
+.tea-card {
+    border-radius: 1rem;
+    overflow: hidden;
+    background-color: #fff;
+    transition: transform .22s ease, box-shadow .22s ease;
+}
+
+.tea-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 .9rem 2rem rgba(31, 45, 39, .13) !important;
+}
+
+.tea-card__cover {
+    position: relative;
+    height: 118px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tea-card__emoji {
+    font-size: 2.6rem;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .18));
+}
+
+.tea-card__badge {
+    position: absolute;
+    top: .6rem;
+    right: .6rem;
+    font-size: .68rem;
+    font-weight: 600;
+    color: #33453c;
+    opacity: .92;
+}
+
+.tea-card .card-title {
+    color: var(--tea-900);
+    font-weight: 700;
+}
+
+.tea-tag {
+    background-color: var(--tea-100);
+    color: var(--tea-800);
+    font-weight: 500;
+}
+
+.tea-card:hover .link-tea {
+    color: var(--tea-900);
+}
+
+/* ---------- 精选配方 ---------- */
+.recipe-card {
+    border: 0;
+    border-radius: 1rem;
+    overflow: hidden;
+    background-color: #fff;
+    height: 100%;
+}
+
+.recipe-card__top {
+    height: 92px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: .8rem 1rem;
+    color: #fff;
+}
+
+.recipe-card__top h3 {
+    font-size: 1.02rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.recipe-meta {
+    font-size: .78rem;
+    color: #7b8c84;
+}
+
+.recipe-meta span + span::before {
+    content: "·";
+    margin: 0 .45rem;
+    color: #c3d1ca;
+}
+
+.rank-list .list-group-item {
+    border-color: var(--tea-100);
+    background-color: transparent;
+    padding-block: .85rem;
+}
+
+.rank-index {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .78rem;
+    font-weight: 700;
+    background-color: var(--tea-100);
+    color: var(--tea-800);
+}
+
+.rank-list .list-group-item:first-child .rank-index {
+    background-color: var(--tea-accent);
+    color: #fff;
+}
+
+/* ---------- 冲泡指南 ---------- */
+.accordion-tea .accordion-item {
+    border: 1px solid var(--tea-100);
+    border-radius: .85rem !important;
+    overflow: hidden;
+    margin-bottom: .75rem;
+    background-color: #fff;
+}
+
+.accordion-tea .accordion-button {
+    font-weight: 600;
+    color: var(--tea-900);
+    background-color: #fff;
+}
+
+.accordion-tea .accordion-button:not(.collapsed) {
+    background-color: var(--tea-100);
+    color: var(--tea-900);
+    box-shadow: none;
+}
+
+.accordion-tea .accordion-button:focus {
+    box-shadow: none;
+    border-color: var(--tea-300);
+}
+
+.accordion-tea .accordion-body {
+    color: #55665e;
+    font-size: .92rem;
+}
+
+.brew-panel {
+    border: 0;
+    border-radius: 1rem;
+    background: linear-gradient(160deg, #fff, var(--tea-100));
+}
+
+.brew-panel .table > :not(caption) > * > * {
+    background-color: transparent;
+    border-color: rgba(47, 125, 93, .12);
+}
+
+.brew-panel .table thead th {
+    color: var(--tea-800);
+    font-size: .8rem;
+    letter-spacing: .06em;
+    font-weight: 600;
+}
+
+/* ---------- 茶事速报 ---------- */
+.news-card {
+    border: 0;
+    border-radius: 1rem;
+    background-color: #fff;
+}
+
+.news-date {
+    font-size: .74rem;
+    letter-spacing: .08em;
+    color: var(--tea-500);
+    font-weight: 600;
+}
+
+/* ---------- 订阅 CTA ---------- */
+.cta-band {
+    background: linear-gradient(120deg, var(--tea-900), var(--tea-700) 60%, var(--tea-500));
+    border-radius: 1.25rem;
+    color: #fff;
+    overflow: hidden;
+    position: relative;
+}
+
+.cta-band::after {
+    content: "🍵";
+    position: absolute;
+    right: 2rem;
+    bottom: -1.2rem;
+    font-size: 7rem;
+    opacity: .16;
+}
+
+/* ---------- 页脚 ---------- */
+.footer-tea {
+    background-color: var(--tea-900);
+    color: #d7e5dd;
+}
+
+.footer-tea .brand-name {
+    color: #fff;
+}
+
+.footer-text {
+    color: #a9c0b5;
+}
+
+.footer-title {
+    font-size: .8rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.footer-links a {
+    color: #a9c0b5;
+    text-decoration: none;
+    display: inline-block;
+    padding-block: .22rem;
+    transition: color .16s ease;
+}
+
+.footer-links a:hover {
+    color: #fff;
+}
+
+.footer-social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: .3rem .7rem;
+    font-size: .78rem;
+    color: #d7e5dd;
+    border: 1px solid rgba(255, 255, 255, .22);
+    border-radius: 999px;
+    text-decoration: none;
+    transition: background-color .16s ease, color .16s ease;
+}
+
+.footer-social:hover {
+    background-color: #fff;
+    color: var(--tea-900);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, .12);
+}
+
+.footer-tea .form-control {
+    background-color: rgba(255, 255, 255, .08);
+    border-color: rgba(255, 255, 255, .18);
+    color: #fff;
+}
+
+.footer-tea .form-control::placeholder {
+    color: #8fa79b;
+}
+
+.footer-tea .form-control:focus {
+    background-color: rgba(255, 255, 255, .14);
+    border-color: var(--tea-300);
+    color: #fff;
+    box-shadow: 0 0 0 .2rem rgba(168, 221, 195, .2);
+}
+
+@media (max-width: 991.98px) {
+    .navbar-tea .navbar-collapse {
+        padding-top: .75rem;
+    }
+
+    .nav-search .form-control {
+        min-width: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tea-card,
+    .footer-links a {
+        transition: none;
+    }
+}
