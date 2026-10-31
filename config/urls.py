@@ -26,6 +26,8 @@ urlpatterns = [
     path('users/', include('users.web_urls')),
     # 移动 APP / 前端：JWT 认证的 REST API
     path('api/users/', include('users.urls')),
+    path('api/recipes/', include('recipes.urls')),
+    path('api/collects/', include('collects.urls')),
 ]
 
 if settings.DEBUG:
