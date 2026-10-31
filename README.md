@@ -13,6 +13,9 @@
 ### 用户模块（users）
 
 门户网页走 **Session** 认证，移动 APP 走 **JWT**，两者共用 `users.User` 一张表。
+
+> 完整的接口文档（参数、响应样例、错误码）见 [API.md](API.md)。
+
 `users.User` 在 Django 自带 `AbstractUser` 基础上扩展了：
 
 - `phone`：11 位手机号，唯一，可为空（MySQL 下多个 NULL 不冲突），可作登录账号
@@ -55,7 +58,7 @@ APP 端请求头：`Authorization: Bearer <access>`。Token 有效期 access 2 �
 - 所有对外接口只返回 `is_on_shelf=True` 的配方，未上架配方对 APP 完全不可见
 - `FormulaMaterial.material` 用 `PROTECT`，被配方引用的原料无法删除
 - `TeaFormula` 建了 `(is_on_shelf, -create_time)` 和 `(is_on_shelf, -view_count)` 两个复合索引
-- 浏览 / 搜索 / 详情均为 `AllowAny`，游客可看；收藏等写接口后续再要求 JWT
+- 浏览 / 搜索 / 详情均为 `AllowAny`，游客可看；收藏等写接口在 `collects` 模块，要求登录
 
 | 方法 | 路径 | 认证 | 说明 |
 | --- | --- | --- | --- |
@@ -68,7 +71,7 @@ APP 端请求头：`Authorization: Bearer <access>`。Token 有效期 access 2 �
 
 | 参数 | 说明 |
 | --- | --- |
-| `tag` | 标签 id 或标签名，如 `?tag=3`、`?tag=果茶` |
+| `tag` | 标签 id 或标签名，如 `?tag=3`、`?tag=果茶`；**只支持单个标签**，不支持 `?tag=1,2` |
 | `search` | 关键词，匹配配方名称**或**原料名称（内部 `distinct()` 去重） |
 | `difficulty` | 难度 1-5 |
 | `ordering` | `create_time` / `view_count` / `difficulty` / `duration` / `id`，前缀 `-` 倒序，默认 `-create_time` |
@@ -80,6 +83,25 @@ APP 端请求头：`Authorization: Bearer <access>`。Token 有效期 access 2 �
 详情在此基础上多出 `step_content / steps[] / materials[] / view_count / create_time / update_time`，
 `materials[]` 已按 `sort_order` 升序，并带 `quantity_display`（如 `"10 g"`）。
 
+### 收藏模块（collects）
+
+`UserCollect` 只有 4 个字段：`id / user_id / formula_id / collect_time`，`(user, formula)` 唯一，重复收藏不会产生脏数据；
+另建 `(user, -collect_time)` 复合索引，支撑「我的收藏」按时间翻页。
+
+接口全部要求登录（JWT 或 Session），且只能操作自己的收藏：
+
+| 方法 | 路径 | 说明 |
+| --- | --- | --- |
+| GET | `/api/collects/` | 我的收藏列表，`?ordering=-collect_time`（默认，最新在前）/ `collect_time`（最早在前）/ `id` |
+| POST | `/api/collects/` | 添加收藏 `{"formula_id": 1}`，新建返回 201，已收藏返回 200 且 `created=false` |
+| DELETE | `/api/collects/<formula_id>/` | 取消收藏，成功 204，未收藏 404 |
+| GET | `/api/collects/<formula_id>/status/` | 查询是否已收藏，未收藏也返回 200 + `collected=false` |
+
+- 列表项结构：`{id, collect_time, formula: {…配方卡片字段…}}`，`formula` 直接复用配方模块的卡片序列化器，APP 端可共用一套渲染逻辑
+- 列表项**不含 `formula_id`**，配方 id 在 `formula.id`（`item.id` 是收藏记录 id）
+- 只收藏上架配方；配方下架后自动从收藏列表隐藏，收藏记录仍保留（重新上架即恢复），`count` 只统计可见的收藏
+- 分页默认 20 条，`page_size` 可调，上限 50
+
 ### 常用命令
 
 ```bash
@@ -88,5 +110,6 @@ uv run python manage.py migrate
 uv run python manage.py runserver
 uv run python manage.py test users
 uv run python manage.py test recipes
+uv run python manage.py test collects
 uv run python manage.py seed_recipes        # 导入演示配方数据（--reset 先清空）
 ```
