@@ -11,3 +11,12 @@ wheels/
 
 .workbuddy-ai
 茶饮配方手册APP原型.html
+# 用户上传文件（头像）与本地备份
+media/
+backup/
+
+# IDE
+.idea/
+
+# 数据库
+db.sqlite3

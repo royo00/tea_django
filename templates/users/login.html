@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+
+{% block title %}登录 · 茶饮配方手册{% endblock %}
+{% block meta_description %}登录茶饮配方手册，同步你的配方收藏与冲泡记录。{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-5">
+
+                <div class="card auth-card border-0 shadow-sm">
+                    <div class="card-body p-4 p-lg-5">
+
+                        <div class="text-center mb-4">
+                            <span class="brand-mark mx-auto mb-3">茶</span>
+                            <p class="section-eyebrow mb-1">WELCOME BACK</p>
+                            <h1 class="section-title h3 mb-1">登录</h1>
+                            <p class="text-secondary small mb-0">用户名或手机号都可以登录</p>
+                        </div>
+
+                        {% bootstrap_form_errors form type="non_fields" %}
+
+                        <form method="post" novalidate>
+                            {% csrf_token %}
+                            {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+
+                            {% bootstrap_field form.username show_label=True %}
+                            {% bootstrap_field form.password show_label=True %}
+
+                            <button class="btn btn-tea w-100 py-2 mt-2" type="submit">登录</button>
+                        </form>
+
+                        <hr class="my-4">
+
+                        <p class="text-center small text-secondary mb-0">
+                            还没有账号？<a class="link-tea" href="{% url 'users:register' %}">免费注册</a>
+                        </p>
+                    </div>
+                </div>
+
+                <p class="text-center text-secondary small mt-3 mb-0">
+                    移动端请使用 <code>/api/users/token/</code> 获取 JWT
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

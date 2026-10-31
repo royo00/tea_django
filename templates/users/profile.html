@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+
+{% block title %}个人中心 · 茶饮配方手册{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="row g-4 justify-content-center">
+
+            {# ---------- 左：账号概览 ---------- #}
+            <div class="col-12 col-lg-4">
+                <div class="card auth-card border-0 shadow-sm h-100">
+                    <div class="card-body p-4 text-center">
+
+                        <div class="avatar-frame mx-auto mb-3">
+                            {% if user.avatar %}
+                                <img src="{{ user.avatar.url }}" alt="{{ user.username }} 的头像">
+                            {% else %}
+                                <span class="avatar-fallback">{{ user.username|first|upper }}</span>
+                            {% endif %}
+                        </div>
+
+                        <h2 class="h5 mb-1">{{ user.display_name }}</h2>
+                        <p class="text-secondary small mb-3">@{{ user.username }}</p>
+
+                        <dl class="row small text-start mb-0">
+                            <dt class="col-4 text-secondary fw-normal">手机号</dt>
+                            <dd class="col-8 mb-2">{{ user.phone|default:"未绑定" }}</dd>
+                            <dt class="col-4 text-secondary fw-normal">邮箱</dt>
+                            <dd class="col-8 mb-2 text-break">{{ user.email|default:"未填写" }}</dd>
+                            <dt class="col-4 text-secondary fw-normal">注册时间</dt>
+                            <dd class="col-8 mb-2">{{ user.date_joined|date:"Y-m-d" }}</dd>
+                            <dt class="col-4 text-secondary fw-normal">上次登录</dt>
+                            <dd class="col-8 mb-0">{{ user.last_login|date:"Y-m-d H:i"|default:"—" }}</dd>
+                        </dl>
+
+                        <div class="d-grid gap-2 mt-4">
+                            <a class="btn btn-sm btn-outline-tea" href="{% url 'users:password_change' %}">修改密码</a>
+                            {% if user.is_staff %}
+                                <a class="btn btn-sm btn-tea-light" href="{% url 'admin:index' %}">进入后台</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# ---------- 右：资料编辑 ---------- #}
+            <div class="col-12 col-lg-7">
+                <div class="card auth-card border-0 shadow-sm">
+                    <div class="card-body p-4 p-lg-5">
+                        <p class="section-eyebrow mb-1">PROFILE</p>
+                        <h2 class="section-title h4 mb-4">编辑资料</h2>
+
+                        <form method="post" enctype="multipart/form-data" novalidate>
+                            {% csrf_token %}
+                            <div class="row g-3">
+                                <div class="col-md-6">{% bootstrap_field form.last_name %}</div>
+                                <div class="col-md-6">{% bootstrap_field form.first_name %}</div>
+                                <div class="col-md-6">{% bootstrap_field form.phone %}</div>
+                                <div class="col-md-6">{% bootstrap_field form.email %}</div>
+                                <div class="col-12">{% bootstrap_field form.avatar %}</div>
+                            </div>
+
+                            <div class="d-flex flex-wrap gap-2 mt-4">
+                                <button class="btn btn-tea px-4" type="submit">保存修改</button>
+                                {% if user.avatar %}
+                                    <button class="btn btn-outline-secondary" type="submit"
+                                            name="action" value="remove_avatar">移除头像</button>
+                                {% endif %}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -618,3 +618,86 @@ section[id] {
         transition: none;
     }
 }
+
+/* ---------- 账号模块（登录 / 注册 / 个人中心） ---------- */
+.auth-card {
+    border-radius: 1rem;
+    background-color: #fff;
+}
+
+.auth-card .form-label {
+    font-size: .85rem;
+    color: #55665e;
+    font-weight: 600;
+}
+
+.auth-card .form-control {
+    border-color: var(--tea-100);
+    background-color: var(--tea-50);
+}
+
+.auth-card .form-control:focus {
+    border-color: var(--tea-300);
+    background-color: #fff;
+    box-shadow: 0 0 0 .2rem rgba(87, 185, 138, .18);
+}
+
+.link-tea {
+    color: var(--tea-700);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.link-tea:hover {
+    color: var(--tea-900);
+    text-decoration: underline;
+}
+
+.nav-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex: 0 0 auto;
+}
+
+.nav-avatar--fallback {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(140deg, var(--tea-500), var(--tea-800));
+    color: #fff;
+    font-size: .72rem;
+    font-weight: 700;
+}
+
+.nav-user-name {
+    max-width: 7.5rem;
+    font-size: .85rem;
+}
+
+.avatar-frame {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--tea-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #fff;
+    box-shadow: 0 6px 18px rgba(27, 68, 51, .16);
+}
+
+.avatar-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-fallback {
+    font-family: "Songti SC", "STSong", "SimSun", Georgia, serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--tea-800);
+}

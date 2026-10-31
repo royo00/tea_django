@@ -46,8 +46,36 @@
             </form>
 
             <div class="d-flex align-items-center gap-2">
-                <a class="btn btn-sm btn-outline-tea" href="#">登录</a>
-                <a class="btn btn-sm btn-tea" href="#">免费注册</a>
+                {% if user.is_authenticated %}
+                    <div class="dropdown">
+                        <a class="btn btn-sm btn-tea-light d-flex align-items-center gap-2 dropdown-toggle"
+                           href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {% if user.avatar %}
+                                <img class="nav-avatar" src="{{ user.avatar.url }}" alt="">
+                            {% else %}
+                                <span class="nav-avatar nav-avatar--fallback">{{ user.username|first|upper }}</span>
+                            {% endif %}
+                            <span class="text-truncate nav-user-name">{{ user.display_name }}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-tea shadow">
+                            <li><a class="dropdown-item" href="{% url 'users:profile' %}">个人中心</a></li>
+                            <li><a class="dropdown-item" href="{% url 'users:password_change' %}">修改密码</a></li>
+                            {% if user.is_staff %}
+                                <li><a class="dropdown-item" href="{% url 'admin:index' %}">管理后台</a></li>
+                            {% endif %}
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form method="post" action="{% url 'users:logout' %}" class="m-0">
+                                    {% csrf_token %}
+                                    <button class="dropdown-item" type="submit">退出登录</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <a class="btn btn-sm btn-outline-tea" href="{% url 'users:login' %}">登录</a>
+                    <a class="btn btn-sm btn-tea" href="{% url 'users:register' %}">免费注册</a>
+                {% endif %}
             </div>
         </div>
     </div>

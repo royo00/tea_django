@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+
+{% block title %}注册 · 茶饮配方手册{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-9 col-lg-6">
+
+                <div class="card auth-card border-0 shadow-sm">
+                    <div class="card-body p-4 p-lg-5">
+
+                        <div class="text-center mb-4">
+                            <span class="brand-mark mx-auto mb-3">茶</span>
+                            <p class="section-eyebrow mb-1">JOIN US</p>
+                            <h1 class="section-title h3 mb-1">创建账号</h1>
+                            <p class="text-secondary small mb-0">注册后即可收藏配方、记录冲泡参数</p>
+                        </div>
+
+                        <form method="post" enctype="multipart/form-data" novalidate>
+                            {% csrf_token %}
+                            {% bootstrap_form form %}
+
+                            <button class="btn btn-tea w-100 py-2 mt-2" type="submit">注册并登录</button>
+                        </form>
+
+                        <hr class="my-4">
+
+                        <p class="text-center small text-secondary mb-0">
+                            已有账号？<a class="link-tea" href="{% url 'users:login' %}">直接登录</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
