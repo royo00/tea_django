@@ -10,6 +10,14 @@
 
 管理员账号 `admin`，初始密码 `admin123`（首次部署后请立即修改）。
 
+### 默认数据库配置
+驱动：pymysql
+地址：http://localhost
+端口：3306
+数据库名：tea_django
+账号：root
+密码：123456
+
 ### 用户模块（users）
 
 门户网页走 **Session** 认证，移动 APP 走 **JWT**，两者共用 `users.User` 一张表。
