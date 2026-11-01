@@ -1,0 +1,1180 @@
+/* =========================================================================
+   茶饮配方手册 · 管理后台主题
+   在 Django admin 默认样式之上做覆盖，配色与门户站点（site.css）保持一致。
+   依赖：admin/css/base.css（先加载）、本文件（后加载）。
+   ========================================================================= */
+
+/* ------------------------------------------------------------------ */
+/* 1. 品牌变量：浅色                                                     */
+/* ------------------------------------------------------------------ */
+:root,
+html[data-theme="light"] {
+    --tea-900: #1b4433;
+    --tea-800: #24614a;
+    --tea-700: #2f7d5d;
+    --tea-500: #57b98a;
+    --tea-300: #a8ddc3;
+    --tea-100: #e7f3ec;
+    --tea-50: #f4f7f5;
+    --tea-accent: #c9574f;
+
+    --primary: #2f7d5d;
+    --secondary: #24614a;
+    --accent: #f2d9a3;
+    --primary-fg: #fff;
+
+    --body-fg: #1f2d27;
+    --body-bg: #ffffff;
+    --body-quiet-color: #6b7b73;
+    --body-medium-color: #3f5349;
+    --body-loud-color: #14231c;
+
+    --header-color: #eaf6ef;
+    --header-branding-color: #f2d9a3;
+    --header-bg: #1b4433;
+    --header-link-color: #eaf6ef;
+
+    --breadcrumbs-fg: #c9dcd1;
+    --breadcrumbs-link-fg: #ffffff;
+    --breadcrumbs-bg: #24614a;
+
+    --link-fg: #2f7d5d;
+    --link-hover-color: #1b4433;
+    --link-selected-fg: #c9574f;
+
+    --hairline-color: #e3ebe6;
+    --border-color: #d6e2da;
+
+    --error-fg: #c0392b;
+
+    --message-success-bg: #e7f3ec;
+    --message-warning-bg: #fdf1e1;
+    --message-error-bg: #fdecea;
+
+    --darkened-bg: #f6f9f7;
+    --selected-bg: #e7f3ec;
+    --selected-row: #f1f8f3;
+
+    --button-fg: #fff;
+    --button-bg: #2f7d5d;
+    --button-hover-bg: #1b4433;
+    --default-button-bg: #1b4433;
+    --default-button-hover-bg: #2f7d5d;
+    --close-button-bg: #7d8d85;
+    --close-button-hover-bg: #56665e;
+    --delete-button-bg: #c0392b;
+    --delete-button-hover-bg: #a13024;
+
+    --object-tools-fg: #fff;
+    --object-tools-bg: #2f7d5d;
+    --object-tools-hover-bg: #1b4433;
+
+    --font-family-primary: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB",
+        system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ------------------------------------------------------------------ */
+/* 2. 品牌变量：深色                                                     */
+/* ------------------------------------------------------------------ */
+html[data-theme="dark"] {
+    --primary: #57b98a;
+    --secondary: #1b4433;
+    --accent: #f2d9a3;
+
+    --body-fg: #e4efe9;
+    --body-bg: #121a16;
+    --body-quiet-color: #9ab0a4;
+    --body-medium-color: #c4d5cb;
+    --body-loud-color: #ffffff;
+
+    --header-color: #dff0e6;
+    --header-branding-color: #f2d9a3;
+    --header-bg: #0f1713;
+    --header-link-color: #dff0e6;
+
+    --breadcrumbs-fg: #a8bfb3;
+    --breadcrumbs-link-fg: #dff0e6;
+    --breadcrumbs-bg: #17231d;
+
+    --link-fg: #7fd1a6;
+    --link-hover-color: #a8ddc3;
+    --link-selected-fg: #f2d9a3;
+
+    --hairline-color: #24322b;
+    --border-color: #2e3f36;
+
+    --error-fg: #ff8b7e;
+
+    --message-success-bg: #1d3a2c;
+    --message-warning-bg: #3a3221;
+    --message-error-bg: #3d2521;
+
+    --darkened-bg: #17231d;
+    --selected-bg: #24322b;
+    --selected-row: #1d2b24;
+
+    --button-bg: #2f7d5d;
+    --button-hover-bg: #3d9970;
+    --default-button-bg: #2f7d5d;
+    --default-button-hover-bg: #3d9970;
+    --close-button-bg: #3a4a42;
+    --close-button-hover-bg: #4a5d54;
+    --delete-button-bg: #a13024;
+    --delete-button-hover-bg: #c0392b;
+
+    --object-tools-bg: #2f7d5d;
+    --object-tools-hover-bg: #3d9970;
+}
+
+@media (prefers-color-scheme: dark) {
+    html[data-theme="auto"] {
+        --primary: #57b98a;
+        --secondary: #1b4433;
+        --accent: #f2d9a3;
+
+        --body-fg: #e4efe9;
+        --body-bg: #121a16;
+        --body-quiet-color: #9ab0a4;
+        --body-medium-color: #c4d5cb;
+        --body-loud-color: #ffffff;
+
+        --header-color: #dff0e6;
+        --header-branding-color: #f2d9a3;
+        --header-bg: #0f1713;
+        --header-link-color: #dff0e6;
+
+        --breadcrumbs-fg: #a8bfb3;
+        --breadcrumbs-link-fg: #dff0e6;
+        --breadcrumbs-bg: #17231d;
+
+        --link-fg: #7fd1a6;
+        --link-hover-color: #a8ddc3;
+        --link-selected-fg: #f2d9a3;
+
+        --hairline-color: #24322b;
+        --border-color: #2e3f36;
+
+        --darkened-bg: #17231d;
+        --selected-bg: #24322b;
+        --selected-row: #1d2b24;
+
+        --button-bg: #2f7d5d;
+        --button-hover-bg: #3d9970;
+        --default-button-bg: #2f7d5d;
+        --default-button-hover-bg: #3d9970;
+        --object-tools-bg: #2f7d5d;
+        --object-tools-hover-bg: #3d9970;
+    }
+}
+
+/* ------------------------------------------------------------------ */
+/* 3. 页头 / 品牌                                                        */
+/* ------------------------------------------------------------------ */
+#header {
+    padding: 12px 40px;
+    background: linear-gradient(115deg, #143529 0%, #1b4433 38%, #2f7d5d 100%);
+    box-shadow: 0 2px 14px rgba(15, 35, 26, 0.22);
+}
+
+#branding {
+    align-items: center;
+}
+
+#site-name {
+    margin-inline-end: 24px;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+#site-name a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#site-name a:link,
+#site-name a:visited {
+    color: #fff;
+}
+
+.tea-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(2px);
+}
+
+.tea-logo svg {
+    width: 22px;
+    height: 22px;
+    display: block;
+}
+
+.tea-brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+}
+
+.tea-brand-title {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: #fff;
+}
+
+.tea-brand-sub {
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(232, 243, 236, 0.62);
+}
+
+#user-tools {
+    font-size: 0.75rem;
+    letter-spacing: 0.2px;
+    color: rgba(234, 246, 239, 0.78);
+}
+
+#user-tools strong {
+    color: #fff;
+    font-weight: 600;
+}
+
+#user-tools a,
+#logout-form button {
+    border-radius: 6px;
+    padding: 2px 6px;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+#user-tools a:hover,
+#logout-form button:hover {
+    background: rgba(255, 255, 255, 0.14);
+    text-decoration: none;
+    color: #fff;
+}
+
+/* 主题切换按钮 */
+#user-tools .theme-toggle {
+    border-radius: 6px;
+}
+
+/* ------------------------------------------------------------------ */
+/* 4. 面包屑                                                             */
+/* ------------------------------------------------------------------ */
+div.breadcrumbs {
+    padding: 10px 40px;
+    font-size: 0.75rem;
+    background: var(--breadcrumbs-bg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+div.breadcrumbs a {
+    color: var(--breadcrumbs-link-fg);
+    opacity: 0.88;
+}
+
+div.breadcrumbs a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* ------------------------------------------------------------------ */
+/* 5. 侧边导航                                                           */
+/* ------------------------------------------------------------------ */
+#nav-sidebar {
+    background: var(--darkened-bg);
+    border-right: 1px solid var(--hairline-color);
+}
+
+#nav-sidebar .module th {
+    font-weight: 600;
+    color: var(--body-quiet-color);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-size: 0.6875rem;
+}
+
+#nav-sidebar .current-app .section:link,
+#nav-sidebar .current-app .section:visited {
+    color: var(--link-fg);
+}
+
+#nav-sidebar .current-model {
+    background: var(--selected-bg);
+    border-radius: 6px;
+}
+
+#nav-filter {
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    padding: 7px 10px;
+}
+
+/* ------------------------------------------------------------------ */
+/* 6. 模块卡片                                                           */
+/* ------------------------------------------------------------------ */
+.module {
+    border-radius: 12px;
+    background: var(--body-bg);
+    border: 1px solid var(--hairline-color);
+    box-shadow: 0 1px 2px rgba(20, 45, 33, 0.04), 0 8px 20px -14px rgba(20, 45, 33, 0.28);
+    overflow: hidden;
+}
+
+.module h2,
+fieldset.module h2,
+.module caption,
+.inline-group h2 {
+    padding: 11px 16px;
+    margin: 0;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    background: linear-gradient(180deg, var(--tea-100), rgba(231, 243, 236, 0.45));
+    color: var(--tea-900);
+    border-bottom: 1px solid var(--hairline-color);
+}
+
+/* 应用名称是 caption 里的 <a class="section">，默认白色，需一并改色 */
+.module caption a.section,
+.module caption a.section:link,
+.module caption a.section:visited {
+    color: var(--tea-900);
+    font-weight: 600;
+}
+
+.module caption a.section:hover {
+    color: var(--tea-700);
+}
+
+html[data-theme="dark"] .module h2,
+html[data-theme="dark"] fieldset.module h2,
+html[data-theme="dark"] .module caption,
+html[data-theme="dark"] .inline-group h2 {
+    background: linear-gradient(180deg, #1f2f27, #18241e);
+    color: #cfe6d9;
+}
+
+html[data-theme="dark"] .module caption a.section,
+html[data-theme="dark"] .module caption a.section:link,
+html[data-theme="dark"] .module caption a.section:visited {
+    color: #cfe6d9;
+}
+
+.module table {
+    border-collapse: collapse;
+}
+
+/* 仪表盘 app 列表 */
+/* app_list 里给读屏软件用的表头行（thead.visually-hidden）在表格布局下会被
+   渲染成一条多余色带，这里直接隐藏，行内 th 仍保留语义 */
+.dashboard .module thead.visually-hidden {
+    display: none;
+}
+
+.dashboard .module table th {
+    padding: 9px 16px;
+    font-weight: 500;
+}
+
+.dashboard .module table td {
+    padding: 9px 16px;
+}
+
+.dashboard .module table tr:hover {
+    background: var(--selected-row);
+}
+
+.dashboard .module table th a,
+.dashboard .module table td a {
+    font-weight: 500;
+}
+
+/* ------------------------------------------------------------------ */
+/* 7. 列表页                                                             */
+/* ------------------------------------------------------------------ */
+#changelist {
+    border-radius: 12px;
+}
+
+#changelist .actions {
+    padding: 10px 16px;
+    background: var(--darkened-bg);
+    border-bottom: 1px solid var(--hairline-color);
+    color: var(--body-quiet-color);
+}
+
+#changelist .actions select {
+    border-radius: 8px;
+    padding: 6px 10px;
+    border: 1px solid var(--border-color);
+    background: var(--body-bg);
+    color: var(--body-fg);
+}
+
+#changelist-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#changelist-search input[type="text"] {
+    border-radius: 8px;
+    padding: 7px 12px;
+    border: 1px solid var(--border-color);
+    min-width: 240px;
+    background: var(--body-bg);
+    color: var(--body-fg);
+}
+
+#changelist-search input[type="submit"] {
+    border-radius: 8px;
+}
+
+#changelist table thead th {
+    background: var(--darkened-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 11px 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--body-quiet-color);
+    white-space: nowrap;
+}
+
+#changelist table thead th a:link,
+#changelist table thead th a:visited {
+    color: var(--body-medium-color);
+}
+
+#changelist table tbody td,
+#changelist table tbody th {
+    padding: 11px 12px;
+    border-bottom: 1px solid var(--hairline-color);
+    vertical-align: middle;
+}
+
+#changelist table tbody tr:last-child td,
+#changelist table tbody tr:last-child th {
+    border-bottom: 0;
+}
+
+#changelist table tbody tr:hover {
+    background: var(--selected-row);
+}
+
+#changelist table tbody tr.selected {
+    background: var(--selected-bg);
+}
+
+#changelist .results {
+    border-radius: 0 0 12px 12px;
+    overflow: hidden;
+}
+
+#changelist .paginator {
+    padding: 12px 16px;
+    background: var(--darkened-bg);
+    border-top: 1px solid var(--hairline-color);
+    color: var(--body-quiet-color);
+    font-size: 0.75rem;
+}
+
+#changelist-filter {
+    border-radius: 12px;
+    border: 1px solid var(--hairline-color);
+    overflow: hidden;
+}
+
+#changelist-filter h2 {
+    padding: 11px 16px;
+    font-size: 0.8125rem;
+    background: linear-gradient(180deg, var(--tea-100), rgba(231, 243, 236, 0.45));
+    color: var(--tea-900);
+}
+
+html[data-theme="dark"] #changelist-filter h2 {
+    background: linear-gradient(180deg, #1f2f27, #18241e);
+    color: #cfe6d9;
+}
+
+#changelist-filter h3 {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--body-quiet-color);
+}
+
+#changelist-filter li.selected a {
+    font-weight: 600;
+    color: var(--link-selected-fg);
+}
+
+/* ------------------------------------------------------------------ */
+/* 8. 表单页                                                             */
+/* ------------------------------------------------------------------ */
+.form-row {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--hairline-color);
+}
+
+.form-row:last-child {
+    border-bottom: 0;
+}
+
+.aligned label {
+    font-weight: 600;
+    color: var(--body-medium-color);
+    font-size: 0.8125rem;
+    padding-top: 8px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="number"],
+input[type="tel"],
+textarea,
+select,
+.vTextField,
+.vURLField,
+.vIntegerField,
+.vBigIntegerField,
+.vForeignKeyRawIdAdminField {
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    padding: 8px 11px;
+    background: var(--body-bg);
+    color: var(--body-fg);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+textarea:focus,
+select:focus,
+.vTextField:focus {
+    border-color: var(--tea-500);
+    box-shadow: 0 0 0 3px rgba(87, 185, 138, 0.22);
+    outline: none;
+}
+
+textarea {
+    line-height: 1.6;
+}
+
+.help,
+p.help,
+form p.help,
+div.help,
+span.help {
+    font-size: 0.75rem;
+    color: var(--body-quiet-color);
+    line-height: 1.5;
+}
+
+.readonly {
+    color: var(--body-medium-color);
+    font-weight: 500;
+}
+
+/* 提交区 */
+.submit-row {
+    border-radius: 12px;
+    border: 1px solid var(--hairline-color);
+    background: var(--darkened-bg);
+    padding: 14px 16px;
+}
+
+.submit-row a.deletelink {
+    border-radius: 8px;
+    height: auto;
+    padding: 10px 16px;
+    line-height: 1.2;
+}
+
+/* 内联表格 */
+.inline-group {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--hairline-color);
+    background: var(--body-bg);
+}
+
+.inline-group .tabular tr.has_original td {
+    padding-top: 10px;
+}
+
+.inline-group .tabular thead th {
+    background: var(--darkened-bg);
+    color: var(--body-quiet-color);
+}
+
+/* 错误提示 */
+.errornote {
+    border-radius: 10px;
+    border: 1px solid #f0c2bc;
+    border-left: 4px solid var(--error-fg);
+    background: var(--message-error-bg);
+    color: var(--error-fg);
+    padding: 12px 16px;
+}
+
+.errorlist {
+    color: var(--error-fg);
+    font-weight: 500;
+}
+
+/* ------------------------------------------------------------------ */
+/* 9. 按钮 / 对象工具                                                    */
+/* ------------------------------------------------------------------ */
+.button,
+input[type="submit"],
+input[type="button"],
+button,
+.submit-row input,
+a.button {
+    border-radius: 8px;
+    padding: 9px 16px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    border: 0;
+    cursor: pointer;
+    transition: background-color 0.16s ease, transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+a.button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px -8px rgba(15, 50, 35, 0.55);
+}
+
+.object-tools {
+    margin-top: -38px;
+}
+
+.object-tools a,
+.object-tools a:link,
+.object-tools a:visited {
+    border-radius: 999px;
+    padding: 9px 18px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    background: var(--object-tools-bg);
+    box-shadow: 0 6px 16px -10px rgba(15, 50, 35, 0.8);
+}
+
+.object-tools a:hover,
+.object-tools a:focus {
+    background: var(--object-tools-hover-bg);
+}
+
+.object-tools a.addlink {
+    padding-inline-start: 18px;
+    background: var(--object-tools-bg) url("../admin/img/icon-addlink.svg") no-repeat 10px center;
+    background-size: 12px;
+}
+
+/* ------------------------------------------------------------------ */
+/* 10. 消息提示                                                          */
+/* ------------------------------------------------------------------ */
+ul.messagelist li {
+    border-radius: 10px;
+    margin: 0 0 10px;
+    padding: 12px 16px;
+    font-weight: 500;
+    border: 1px solid rgba(20, 60, 40, 0.08);
+}
+
+ul.messagelist li.success {
+    border-left: 4px solid var(--tea-700);
+}
+
+ul.messagelist li.warning {
+    border-left: 4px solid #c9a227;
+}
+
+ul.messagelist li.error {
+    border-left: 4px solid var(--error-fg);
+}
+
+/* ------------------------------------------------------------------ */
+/* 11. 仪表盘：欢迎横幅 + 数据卡片                                        */
+/* ------------------------------------------------------------------ */
+/* Django 默认把仪表盘内容压到 600px，宽屏下留白过多，这里放开并限制上限 */
+.dashboard #content {
+    width: auto;
+    max-width: 1180px;
+}
+
+.tea-hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 24px 26px;
+    margin-bottom: 20px;
+    border-radius: 16px;
+    color: #fff;
+    background:
+        radial-gradient(120% 140% at 88% -20%, rgba(168, 221, 195, 0.35) 0%, rgba(168, 221, 195, 0) 55%),
+        linear-gradient(115deg, #143529 0%, #1b4433 42%, #2f7d5d 100%);
+    box-shadow: 0 14px 34px -22px rgba(15, 50, 35, 0.9);
+}
+
+.tea-hero__eyebrow {
+    margin: 0 0 6px;
+    font-size: 0.6875rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(242, 217, 163, 0.92);
+}
+
+.tea-hero h2 {
+    margin: 0 0 6px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.tea-hero__desc {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: rgba(234, 246, 239, 0.78);
+}
+
+.tea-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tea-hero__btn,
+.tea-hero__btn:link,
+.tea-hero__btn:visited {
+    display: inline-block;
+    padding: 9px 18px;
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--tea-900);
+    background: #f2d9a3;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transition: transform 0.16s ease, background-color 0.16s ease;
+}
+
+.tea-hero__btn:hover {
+    transform: translateY(-1px);
+    color: var(--tea-900);
+    background: #fff2cf;
+}
+
+.tea-hero__btn--ghost,
+.tea-hero__btn--ghost:link,
+.tea-hero__btn--ghost:visited {
+    background: rgba(255, 255, 255, 0.1);
+    color: #eaf6ef;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.tea-hero__btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.tea-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-bottom: 26px;
+}
+
+.tea-stat,
+.tea-stat:link,
+.tea-stat:visited {
+    display: block;
+    padding: 16px 18px;
+    border-radius: 14px;
+    background: var(--body-bg);
+    border: 1px solid var(--hairline-color);
+    color: var(--body-fg);
+    text-decoration: none;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.tea-stat:hover {
+    transform: translateY(-2px);
+    border-color: var(--tea-300);
+    box-shadow: 0 16px 30px -22px rgba(20, 60, 40, 0.85);
+}
+
+.tea-stat__label {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.6px;
+    color: var(--body-quiet-color);
+}
+
+.tea-stat__value {
+    display: block;
+    margin: 6px 0 2px;
+    font-size: 1.625rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--tea-800);
+}
+
+html[data-theme="dark"] .tea-stat__value {
+    color: var(--tea-300);
+}
+
+.tea-stat__hint {
+    display: block;
+    font-size: 0.6875rem;
+    color: var(--body-quiet-color);
+}
+
+/* ------------------------------------------------------------------ */
+/* 12. 登录页                                                            */
+/* ------------------------------------------------------------------ */
+body.login {
+    background: var(--tea-50);
+}
+
+html[data-theme="dark"] body.login {
+    background: #0c1310;
+}
+
+body.login #container {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    min-height: 100vh;
+}
+
+body.login .main {
+    flex: 1 1 auto;
+    display: flex;
+}
+
+body.login main.content {
+    flex: 1 1 auto;
+    display: flex;
+    padding: 0;
+}
+
+body.login #content {
+    flex: 1 1 auto;
+    padding: 0;
+    max-width: none;
+}
+
+body.login #footer {
+    display: none;
+}
+
+/* admin/base.html 在 #content 末尾留了 <br class="clear">，登录页满屏时会产生 19px 溢出 */
+body.login #content .clear {
+    display: none;
+}
+
+.tea-login {
+    display: grid;
+    grid-template-columns: 1.02fr 1fr;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.tea-login__brand {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    padding: 56px 60px;
+    color: #eaf6ef;
+    overflow: hidden;
+    background:
+        radial-gradient(90% 70% at 85% 8%, rgba(168, 221, 195, 0.34) 0%, rgba(168, 221, 195, 0) 60%),
+        radial-gradient(70% 60% at 5% 95%, rgba(201, 87, 79, 0.22) 0%, rgba(201, 87, 79, 0) 60%),
+        linear-gradient(150deg, #143529 0%, #1b4433 45%, #2f7d5d 100%);
+}
+
+.tea-login__brand::after {
+    content: "";
+    position: absolute;
+    right: -70px;
+    bottom: -90px;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 44px rgba(255, 255, 255, 0.04), 0 0 0 92px rgba(255, 255, 255, 0.03);
+    pointer-events: none;
+}
+
+.tea-login__logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    font-size: 1.75rem;
+}
+
+.tea-login__brand h1 {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+.tea-login__tagline {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.9;
+    color: rgba(234, 246, 239, 0.8);
+}
+
+.tea-login__points {
+    margin: 8px 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    font-size: 0.8125rem;
+    color: rgba(234, 246, 239, 0.86);
+}
+
+.tea-login__points li {
+    position: relative;
+    padding-inline-start: 22px;
+}
+
+.tea-login__points li::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    top: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #f2d9a3;
+    box-shadow: 0 0 0 4px rgba(242, 217, 163, 0.16);
+}
+
+.tea-login__foot {
+    margin: 28px 0 0;
+    font-size: 0.6875rem;
+    letter-spacing: 0.6px;
+    color: rgba(234, 246, 239, 0.5);
+}
+
+.tea-login__panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 32px;
+    background: var(--body-bg);
+}
+
+.tea-login__card {
+    width: 100%;
+    max-width: 380px;
+}
+
+.tea-login__card h2 {
+    margin: 0 0 6px;
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--body-loud-color);
+}
+
+.tea-login__sub {
+    margin: 0 0 26px;
+    font-size: 0.8125rem;
+    color: var(--body-quiet-color);
+}
+
+.tea-field {
+    margin-bottom: 18px;
+}
+
+.tea-field label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    color: var(--body-medium-color);
+}
+
+.tea-field input[type="text"],
+.tea-field input[type="password"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 14px;
+    font-size: 0.875rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background: var(--darkened-bg);
+    color: var(--body-fg);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.tea-field input[type="text"]:focus,
+.tea-field input[type="password"]:focus {
+    background: var(--body-bg);
+    border-color: var(--tea-500);
+    box-shadow: 0 0 0 3px rgba(87, 185, 138, 0.2);
+    outline: none;
+}
+
+.tea-login__submit {
+    width: 100%;
+    margin-top: 8px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #fff;
+    background: linear-gradient(115deg, #1b4433, #2f7d5d);
+    cursor: pointer;
+    transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+}
+
+.tea-login__submit:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.06);
+    box-shadow: 0 14px 26px -16px rgba(15, 60, 40, 0.9);
+}
+
+.tea-login__back {
+    margin-top: 22px;
+    text-align: center;
+    font-size: 0.75rem;
+}
+
+.tea-login__back a {
+    color: var(--body-quiet-color);
+}
+
+.tea-login__back a:hover {
+    color: var(--link-fg);
+}
+
+.tea-login .errornote {
+    margin-bottom: 16px;
+}
+
+/* ------------------------------------------------------------------ */
+/* 13. 滚动条 & 细节                                                     */
+/* ------------------------------------------------------------------ */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(47, 125, 93, 0.35);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(47, 125, 93, 0.55);
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+a:link,
+a:visited {
+    transition: color 0.15s ease;
+}
+
+/* ------------------------------------------------------------------ */
+/* 14. 响应式                                                            */
+/* ------------------------------------------------------------------ */
+@media (max-width: 1024px) {
+    #header {
+        padding: 12px 20px;
+    }
+
+    div.breadcrumbs {
+        padding: 10px 20px;
+    }
+
+    .object-tools {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 900px) {
+    .tea-login {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .tea-login__brand {
+        padding: 36px 26px;
+        gap: 10px;
+    }
+
+    .tea-login__brand::after,
+    .tea-login__points,
+    .tea-login__foot {
+        display: none;
+    }
+
+    .tea-login__brand h1 {
+        font-size: 1.375rem;
+    }
+
+    .tea-login__panel {
+        padding: 32px 22px 56px;
+    }
+}
+
+@media (max-width: 767px) {
+    .tea-hero {
+        padding: 20px;
+    }
+
+    .tea-stats {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+}

@@ -1,0 +1,33 @@
+{% extends "admin/base.html" %}
+{% load i18n static %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{# 自定义主题：加载在 admin/css/base.css 之后，覆盖品牌配色与组件样式 #}
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" href="{% static 'css/admin_theme.css' %}">{% endblock %}
+
+{% block extrahead %}{{ block.super }}
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231b4433'/%3E%3Cpath d='M16 6c5.2 2.6 8 6.4 8 10.6A8 8 0 0 1 16 25a8 8 0 0 1-8-8.4C8 12.4 10.8 8.6 16 6z' fill='%23a8ddc3'/%3E%3Cpath d='M16 10v11' stroke='%231b4433' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E">
+{% endblock %}
+
+{% block branding %}
+<div id="site-name">
+    <a href="{% url 'admin:index' %}">
+        <span class="tea-logo" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 3.2c4 2.2 6.2 5.2 6.2 8.6A6.2 6.2 0 0 1 12 18a6.2 6.2 0 0 1-6.2-6.2C5.8 8.4 8 5.4 12 3.2z" fill="#a8ddc3"/>
+                <path d="M12 7v9.4" stroke="#1b4433" stroke-width="1.3" stroke-linecap="round"/>
+            </svg>
+        </span>
+        <span class="tea-brand-text">
+            <span class="tea-brand-title">{{ site_header|default:_('Django administration') }}</span>
+            <span class="tea-brand-sub">Tea Formula Admin</span>
+        </span>
+    </a>
+</div>
+{% if user.is_anonymous %}
+  {% include "admin/color_theme_toggle.html" %}
+{% endif %}
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

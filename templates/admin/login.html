@@ -1,0 +1,87 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block title %}登录 · {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{# 先加载 admin 自带 login.css，再加载自定义主题，保证覆盖顺序正确 #}
+{% block extrastyle %}<link rel="stylesheet" href="{% static "admin/css/login.css" %}">
+<link rel="stylesheet" href="{% static "css/admin_theme.css" %}">
+{{ form.media }}{% endblock %}
+
+{% block bodyclass %}{{ block.super }} login{% endblock %}
+
+{% block header %}{% endblock %}
+{% block usertools %}{% endblock %}
+{% block nav-global %}{% endblock %}
+{% block nav-sidebar %}{% endblock %}
+{% block content_title %}{% endblock %}
+{% block nav-breadcrumbs %}{% endblock %}
+
+{% block content %}
+<div class="tea-login">
+
+  {# ---------- 左侧品牌区 ---------- #}
+  <aside class="tea-login__brand">
+    <div class="tea-login__logo" aria-hidden="true">🍵</div>
+    <h1>茶饮配方手册</h1>
+    <p class="tea-login__tagline">配方 · 原料 · 参数 · 收藏<br>一体化内容管理后台</p>
+    <ul class="tea-login__points">
+      <li>统一维护六大茶类与新式茶饮配方</li>
+      <li>原料用量与冲泡参数可视化管理</li>
+      <li>用户与收藏数据一站式查看</li>
+    </ul>
+    <p class="tea-login__foot">© {% now "Y" %} 茶饮配方手册 · Tea Formula Manual</p>
+  </aside>
+
+  {# ---------- 右侧登录表单 ---------- #}
+  <main class="tea-login__panel">
+    <div class="tea-login__card">
+      <h2>管理员登录</h2>
+      <p class="tea-login__sub">请使用后台账号登录，仅限授权人员访问。</p>
+
+      {% if form.errors and not form.non_field_errors %}
+      <p class="errornote">请修正下面的错误后重试。</p>
+      {% endif %}
+
+      {% for error in form.non_field_errors %}
+      <p class="errornote">{{ error }}</p>
+      {% endfor %}
+
+      {% if user.is_authenticated %}
+      <p class="errornote">当前已以 {{ username }} 身份登录，但没有该页面的访问权限，请更换账号登录。</p>
+      {% endif %}
+
+      <form action="{{ app_path }}" method="post" id="login-form">
+        {% csrf_token %}
+
+        <div class="tea-field">
+          <label for="id_username">用户名</label>
+          {{ form.username }}
+          {{ form.username.errors }}
+        </div>
+
+        <div class="tea-field">
+          <label for="id_password">密码</label>
+          {{ form.password }}
+          {{ form.password.errors }}
+          <input type="hidden" name="next" value="{{ next }}">
+        </div>
+
+        {% url 'admin_password_reset' as password_reset_url %}
+        {% if password_reset_url %}
+        <div class="password-reset-link">
+          <a href="{{ password_reset_url }}">忘记登录密码？</a>
+        </div>
+        {% endif %}
+
+        <button type="submit" class="tea-login__submit">登录后台</button>
+      </form>
+
+      <div class="tea-login__back">
+        <a href="{{ site_url|default:'/home/' }}">← 返回门户首页</a>
+      </div>
+    </div>
+  </main>
+
+</div>
+{% endblock %}

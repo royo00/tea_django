@@ -30,6 +30,22 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# ===========================================================================
+# 反向代理 / HTTPS
+# ===========================================================================
+# 生产环境由 Nginx 终止 TLS，再以 http 反代到 gunicorn，于是 Django 看到的
+# request.scheme 是 http。而 DRF 的 ImageField 用 request.build_absolute_uri()
+# 拼地址，结果封面/头像全变成 http://，https 页面加载时被浏览器按混合内容拦截
+# （分页的 next/previous 绝对链接同样受影响）。
+#
+# 显式声明「信任代理传来的协议头」，让 request.scheme / request.is_secure()
+# 正确还原成 https。顺带也修掉了 Session 登录在 https 下的 CSRF Origin 校验失败。
+#
+# 配套要求（nginx 侧必须加，否则这个头不存在、配置不生效）：
+#     proxy_set_header X-Forwarded-Proto $scheme;
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+
 # Application definition
 
 INSTALLED_APPS = [

@@ -19,6 +19,16 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+# ===========================================================================
+# 后台品牌与站点链接
+# ===========================================================================
+# site_header / site_title / index_title 决定后台页头与浏览器标题文案；
+# site_url 是页头「查看站点」链接的目标，指向门户首页 /home/ 而不是根路径。
+admin.site.site_header = "茶饮配方手册 · 管理后台"
+admin.site.site_title = "茶饮配方手册"
+admin.site.index_title = "内容与数据管理"
+admin.site.site_url = "/home/"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', include('home.urls')),

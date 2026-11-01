@@ -10,6 +10,21 @@
 
 管理员账号 `admin`，初始密码 `admin123`（首次部署后请立即修改）。
 
+### 后台管理（admin）
+
+后台做了品牌化改造，配色与门户站点一致（茶绿主色 + 米金点缀），支持浅色 / 深色两种主题：
+
+| 文件 | 作用 |
+| --- | --- |
+| `config/urls.py` | 站点文案 `site_header` / `site_title` / `index_title`，并把「查看站点」的 `site_url` 指向 `/home/` |
+| `static/css/admin_theme.css` | 后台主题：品牌色变量、页头渐变、模块卡片、表格 / 表单 / 按钮、登录页、仪表盘样式 |
+| `templates/admin/base_site.html` | 页头品牌标识（logo + 中英文标题）、favicon、加载主题 CSS |
+| `templates/admin/index.html` | 仪表盘：欢迎横幅 + 数据概览卡片 + 应用列表 |
+| `templates/admin/login.html` | 登录页：左侧品牌介绍 + 右侧登录表单 |
+| `home/templatetags/admin_stats.py` | 仪表盘数据卡片的统计标签（配方 / 原料 / 用户 / 收藏） |
+
+> 想恢复 Django 默认外观，删除 `templates/admin/` 下的自定义模板并移除 `config/urls.py` 中的品牌配置即可。
+
 ### 默认数据库配置
 驱动：pymysql
 地址：http://localhost
@@ -17,6 +32,33 @@
 数据库名：tea_django
 账号：root
 密码：123456
+
+#### MySQL 时区表（必做，否则后台报错）
+
+项目 `USE_TZ = True`，admin 的 `date_hierarchy`、`__date` / `__year` 查询都会生成
+`CONVERT_TZ(..., 'UTC', 'Asia/Shanghai')`。Windows 版 MySQL 不预装时区数据，
+`mysql.time_zone*` 四张表为空时 `CONVERT_TZ` 恒返回 NULL，访问
+`/admin/recipes/teaformula/` 会抛：
+
+```
+Database returned an invalid datetime value. Are time zone definitions for your database installed?
+```
+
+导入时区数据（可重复执行，需要 root 权限）：
+
+```bash
+uv run python scripts/import_mysql_timezones.py
+# 只导入常用时区：uv run python scripts/import_mysql_timezones.py --only Asia/Shanghai UTC
+```
+
+脚本直接解析 tzdata 的 TZif 文件，并额外做了两件 MySQL 官方工具做不到的事：
+
+- 展开 slim 格式尾部的 POSIX TZ 字符串，把 2007 年之后的夏令时切换补齐到 2037 年
+- 丢弃超过 2038-01-19 的 transition——只要存在这种记录，MySQL 会整条时区加载失败
+  （`Asia/Gaza`、`Asia/Hebron` 就是被这个坑到 `CONVERT_TZ` 返回 NULL）
+
+导入后**需重启 MySQL 服务**清空时区缓存，之前查询过的时区才会用上新数据
+（`FLUSH TABLES` 无效，时区缓存独立于表缓存）。
 
 ### 用户模块（users）
 
