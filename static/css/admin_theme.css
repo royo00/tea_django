@@ -265,6 +265,12 @@ html[data-theme="dark"] {
 #user-tools .theme-toggle {
     border-radius: 6px;
 }
+/* 隐藏主题图标的透明色 */
+.theme-toggle svg.theme-icon-when-auto,
+.theme-toggle svg.theme-icon-when-dark,
+.theme-toggle svg.theme-icon-when-light {
+    color: #ffffff00;
+}
 
 /* ------------------------------------------------------------------ */
 /* 4. 面包屑                                                             */
@@ -689,8 +695,8 @@ a.button:hover {
 }
 
 .object-tools a.addlink {
-    padding-inline-start: 18px;
-    background: var(--object-tools-bg) url("../admin/img/icon-addlink.svg") no-repeat 10px center;
+    padding-inline-start: 26px;
+    background: var(--object-tools-bg) url("../img/icon-addlink.svg") no-repeat 10px center;
     background-size: 12px;
 }
 
