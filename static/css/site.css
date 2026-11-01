@@ -701,3 +701,208 @@ section[id] {
     font-weight: 700;
     color: var(--tea-800);
 }
+
+/* ---------- 导航栏 APP 下载按钮 ---------- */
+.btn-app-download {
+    border: 1px solid var(--tea-300);
+    border-radius: 999px;
+    padding: .26rem .8rem .26rem .32rem;
+    background-color: #fff;
+    color: var(--tea-800);
+    font-size: .8rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: background-color .18s ease, border-color .18s ease, color .18s ease;
+}
+
+.btn-app-download:hover,
+.btn-app-download:focus-visible {
+    background-color: var(--tea-700);
+    border-color: var(--tea-700);
+    color: #fff;
+}
+
+.app-download__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 50%;
+    background: linear-gradient(140deg, var(--tea-500), var(--tea-800));
+    color: #fff;
+    font-size: .74rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* ---------- APP 推广弹窗 ---------- */
+.app-promo {
+    position: relative;
+    border: 0;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    box-shadow: 0 26px 64px rgba(15, 44, 33, .32);
+}
+
+.app-promo__close {
+    position: absolute;
+    top: .85rem;
+    right: .85rem;
+    z-index: 5;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, .92);
+    background-size: .72rem auto;
+    box-shadow: 0 2px 10px rgba(15, 44, 33, .18);
+    opacity: .8;
+}
+
+.app-promo__close:hover,
+.app-promo__close:focus-visible {
+    background-color: #fff;
+    opacity: 1;
+}
+
+/* 左栏：文案与下载入口 */
+.app-promo__info {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.6rem, 3vw, 2.5rem);
+    background:
+        radial-gradient(circle at 0% 0%, rgba(87, 185, 138, .18), transparent 46%),
+        #fff;
+}
+
+.app-promo__eyebrow {
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .22em;
+    color: var(--tea-500);
+}
+
+.app-promo__title {
+    font-family: "Songti SC", "STSong", "SimSun", Georgia, serif;
+    font-size: clamp(1.4rem, 2.6vw, 1.85rem);
+    font-weight: 700;
+    line-height: 1.28;
+    color: var(--tea-900);
+    margin-bottom: .75rem;
+}
+
+.app-promo__desc {
+    font-size: .9rem;
+    line-height: 1.7;
+    color: #5b6d64;
+    margin-bottom: 1.15rem;
+}
+
+.app-promo__features {
+    list-style: none;
+    margin: 0 0 1.6rem;
+    padding: 0;
+    display: grid;
+    gap: .55rem;
+}
+
+.app-promo__features li {
+    position: relative;
+    padding-left: 1.65rem;
+    font-size: .85rem;
+    line-height: 1.5;
+    color: #47594f;
+}
+
+.app-promo__features li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: .05rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.15rem;
+    height: 1.15rem;
+    border-radius: 50%;
+    background-color: var(--tea-100);
+    color: var(--tea-700);
+    font-size: .6rem;
+    font-weight: 700;
+}
+
+.app-promo__cta {
+    margin-top: auto;
+}
+
+.app-promo__btn {
+    border-radius: .8rem;
+    font-weight: 600;
+    box-shadow: 0 10px 24px rgba(47, 125, 93, .26);
+}
+
+.app-promo__note {
+    margin-top: .7rem;
+    font-size: .74rem;
+    color: #8a9a92;
+    text-align: center;
+}
+
+/* 右栏：APP 首页截图 */
+.app-promo__shot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1.25rem, 2.5vw, 1.9rem) 1.25rem;
+    background:
+        radial-gradient(circle at 72% 16%, rgba(168, 221, 195, .55), transparent 58%),
+        linear-gradient(165deg, var(--tea-800), var(--tea-900));
+}
+
+.app-promo__phone {
+    display: inline-flex;
+    max-width: 100%;
+    padding: 5px;
+    border-radius: 1.7rem;
+    background-color: #fff;
+    box-shadow: 0 20px 44px rgba(6, 28, 20, .42);
+}
+
+.app-promo__phone img {
+    display: block;
+    height: clamp(300px, 50vh, 420px);
+    width: auto;
+    max-width: 100%;
+    border-radius: 1.3rem;
+    object-fit: cover;
+    object-position: top center;
+}
+
+@media (max-width: 991.98px) {
+    .app-promo__close {
+        top: .6rem;
+        right: .6rem;
+    }
+
+    .app-promo__shot {
+        padding: 1rem .75rem;
+    }
+
+    .app-promo__phone img {
+        height: 220px;
+    }
+}
+
+/* 导航展开但容器偏窄时，给搜索框让位，避免「APP 下载」按钮把导航挤出去 */
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+    .nav-search .form-control {
+        min-width: 140px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn-app-download {
+        transition: none;
+    }
+}

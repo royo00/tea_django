@@ -1,0 +1,55 @@
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% comment %}
+APP 推广弹窗（Bootstrap 5 Modal，由 base.html 统一挂载）
+· 触发：导航栏「APP 下载」按钮 → data-bs-target="#appPromoModal"
+· 关闭：右上角 ×、Esc 键（data-bs-keyboard）、点击遮罩空白处（data-bs-backdrop）
+{% endcomment %}
+<div class="modal fade" id="appPromoModal" tabindex="-1"
+     aria-labelledby="appPromoModalLabel" aria-hidden="true"
+     data-bs-backdrop="true" data-bs-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content app-promo">
+
+            <button type="button" class="btn-close app-promo__close"
+                    data-bs-dismiss="modal" aria-label="关闭"></button>
+
+            <div class="modal-body p-0">
+                <div class="row g-0">
+
+                    {# 左：APP 基本信息 + 下载入口 #}
+                    <div class="col-lg-6 app-promo__info">
+                        <p class="app-promo__eyebrow mb-2">HARMONYOS APP · 原生鸿蒙版</p>
+                        <h2 class="app-promo__title" id="appPromoModalLabel">茶饮配方手册<br>装进口袋</h2>
+                        <p class="app-promo__desc">
+                            网页上的配方，手机上随时翻。分类筛选、参数速查、收藏同步，
+                            一个 ArkTS 原生应用全部搞定。
+                        </p>
+
+                        <ul class="app-promo__features">
+                            <li>42 款上架配方，按茶类与场景一键筛选</li>
+                            <li>用料克数、水温、出汤时间一屏读完</li>
+                            <li>与网页端共用账号，收藏跨端实时同步</li>
+                        </ul>
+
+                        <div class="app-promo__cta">
+                            {% bootstrap_button "下载鸿蒙 APP" button_type="link" href="https://gitee.com/Yandere-xin/harmonyosproject" button_class="btn-tea" size="lg" extra_classes="w-100 app-promo__btn" target="_blank" rel="noopener noreferrer" %}
+                            <p class="app-promo__note mb-0">跳转 Gitee 开源仓库 · 含安装包与源码</p>
+                        </div>
+                    </div>
+
+                    {# 右：APP 首页截图 #}
+                    <div class="col-lg-6 app-promo__shot">
+                        <div class="app-promo__phone">
+                            <img src="{% static 'img/harmonyos-app-home.png' %}"
+                                 alt="茶饮配方手册鸿蒙版 APP 首页：搜索框、本周上新、分类筛选与推荐配方列表"
+                                 decoding="async">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

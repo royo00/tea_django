@@ -45,6 +45,15 @@
                 </div>
             </form>
 
+            {# APP 下载按钮：唤出首页的 APP 推广弹窗 #}
+            <button type="button"
+                    class="btn btn-sm btn-app-download d-inline-flex align-items-center gap-2 me-xl-3 mb-3 mb-xl-0"
+                    data-bs-toggle="modal" data-bs-target="#appPromoModal"
+                    aria-controls="appPromoModal">
+                <span class="app-download__icon" aria-hidden="true">↓</span>
+                <span>APP 下载</span>
+            </button>
+
             <div class="d-flex align-items-center gap-2">
                 {% if user.is_authenticated %}
                     <div class="dropdown">

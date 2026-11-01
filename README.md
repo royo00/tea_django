@@ -10,6 +10,19 @@
 
 管理员账号 `admin`，初始密码 `admin123`（首次部署后请立即修改）。
 
+### 门户前台
+
+| 文件 | 作用 |
+| --- | --- |
+| `templates/base.html` | 页面骨架：加载 django-bootstrap5 的 CSS / JS，挂载导航、页脚与 APP 推广弹窗 |
+| `templates/includes/navbar.html` | 吸顶主导航，含「APP 下载」按钮（`data-bs-target="#appPromoModal"`） |
+| `templates/includes/app_promo_modal.html` | APP 推广弹窗（Bootstrap 5 Modal）：左栏 App 简介 + Gitee 下载按钮，右栏 `static/img/harmonyos-app-home.png` 截图 |
+| `static/css/site.css` | 门户样式：品牌色变量与 `.app-promo*`、`.btn-app-download` 等组件修饰 |
+
+弹窗挂在 `base.html` 上，因此任意页面点导航栏的「APP 下载」都能唤出；
+关闭方式为 Esc 键、点击遮罩空白处、右上角 ×（Bootstrap 原生行为，`data-bs-keyboard` / `data-bs-backdrop`）。
+若要改成进首页自动弹出，在 `home/templates/home/index.html` 的 `extra_js` 里 `new bootstrap.Modal('#appPromoModal').show()` 即可。
+
 ### 后台管理（admin）
 
 后台做了品牌化改造，配色与门户站点一致（茶绿主色 + 米金点缀），支持浅色 / 深色两种主题：
